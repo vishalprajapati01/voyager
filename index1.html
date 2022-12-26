@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    <style>
+        
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box ;
+            font-family: 'Poppins',sans-serif;
+        }
+        .preloader{
+            position:fixed ;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #070707;
+            z-index: 100000000;
+
+
+        }
+        .preloader:before{
+            
+            content:"Voyager";
+            position: absolute;
+            font-size: 12em;
+            text-transform: uppercase;
+            color:green;
+
+
+        }
+        
+
+        
+        .counter{
+            position: relative;
+            color:#fff;
+            font-size: 2em;
+            font-weight: 700;
+            z-index: 1;
+            
+            
+
+        }
+
+        .counter:after{
+            content: "%";
+            font-size: 0.4em;
+        }
+
+
+        .hide{
+            opacity: 0;
+            transition:0.5s ;
+            pointer-events: none;
+        }
+
+        .preloader.active{
+            transform: translateY(-100vh);
+            transition: ease-in-out 1s;
+            transition-delay: .5s;
+
+        }
+
+        @media(max-width:600px){
+            .preloader{
+                font-size: 4.5px;
+            }
+            .counter{
+                font-size: medium;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+#container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #576574;
+}
+#loading{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    /* background: #fff; */
+    border-radius: 50%;
+    border-top: 10px solid #ff6b6b;
+    animation: animate 2s linear infinite;
+   
+}
+@keyframes animate {
+    to{
+        transform: rotate(360deg);
+    }
+}
+#loading::after{
+    transform: rotate(120deg);
+    border-top: 10px solid #feca57;
+}
+#loading::before{
+    transform: rotate(240deg);
+    border-top: 10px solid #48dbfb;
+}
+#loading::after,
+#loading::before{
+    content: '';
+    top: -10px;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    /* background: #fff; */
+    border-radius: 50%;
+}
+#loading span{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    color: #fff;
+    animation: a2 2s linear infinite;
+}
+@keyframes a2 {
+    to{
+        transform: rotate(-360deg);
+    }
+}
+img{
+    width: 100%;
+    background-size: cover;
+}
+#content{
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to Voyager</h1>
+    <div>
+       About
+       <p>Voyager is an expedition to the realm of cutting edge technology. An amalgamation of competitions, tech-talks, workshops and enchanting fun events. voyager aims to weave creativity, learning and knowledge, in a bit to unleash ideas that transcend notions and limits.</p>
+    </div>
+
+
+    <div class="preloader">
+        <div class="counter" style="flex:content;"n>0</div>
+        <div id="container">
+            <div id="loading">
+                <span id="loading-img">IEEE-VIT</span>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+
+
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+        function counter(){
+            var count=setInterval(function(){
+                var c =parseInt($('.counter').text());
+                $('.counter').text((++c).toString());
+                if (c == 100){
+                    clearInterval(count);
+                    $(".counter").addClass("hide")
+                    $(".preloader").addClass("active")
+                
+
+                }
+        },60)
+        }
+        counter()
+
+
+
+      
+        $(window).load(function(){
+            $('#loading').fadeOut();
+            $('#loading-img').delay(150).fadeOut('slow');
+        }),4000;
+
+    </script>
+</body>
+</html>
